@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('primary_legislation', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->foreignUuid('region_id')
+            $table->foreignUuid('type_id')
                 ->nullable()
                 ->constrained()
                 ->nullOnDelete();

@@ -2,7 +2,6 @@
 
 namespace App\Models\Legislation;
 
-use App\Models\Region;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -50,6 +49,9 @@ use Spatie\Tags\HasTags;
  * @method static \Illuminate\Database\Eloquent\Builder|PrimaryLegislation withAnyTags(\ArrayAccess|\Spatie\Tags\Tag|array $tags, ?string $type = null)
  * @method static \Illuminate\Database\Eloquent\Builder|PrimaryLegislation withAnyTagsOfAnyType($tags)
  * @mixin \Eloquent
+ * @property string|null $type_id
+ * @method static \Illuminate\Database\Eloquent\Builder|PrimaryLegislation whereTypeId($value)
+ * @property-read \App\Models\Legislation\Type|null $type
  */
 class PrimaryLegislation extends Model
 {
@@ -64,7 +66,7 @@ class PrimaryLegislation extends Model
      * @var array
      */
     protected $fillable = [
-        'region_id', 'bill_number', 'act_number', 'act_year', 'title', 'reddit_url', 'introductory_text', 'commencement_date', 'royal_assent_date', 'metadata', 'explanatory_notes'
+        'type_id', 'bill_number', 'act_number', 'act_year', 'title', 'reddit_url', 'introductory_text', 'commencement_date', 'royal_assent_date', 'metadata', 'explanatory_notes'
     ];
 
     /**
@@ -87,12 +89,12 @@ class PrimaryLegislation extends Model
     ];
 
     /**
-     * Return the relationship for the legislation's region.
+     * Return the relationship for the legislation's type.
      *
      * @return BelongsTo
      */
-    public function region(): BelongsTo
+    public function type(): BelongsTo
     {
-        return $this->belongsTo(Region::class, 'region_id');
+        return $this->belongsTo(Type::class, 'type_id');
     }
 }

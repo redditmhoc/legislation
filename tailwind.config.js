@@ -6,7 +6,15 @@ module.exports = {
         "./resources/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                sans: ['Albert Sans', 'sans-serif'],
+                serif: ['serif'],
+                mono: ['monospace']
+            },
+        }
     },
-    plugins: [],
+    plugins: [
+        require('daisyui')
+    ],
 }
